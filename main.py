@@ -43,8 +43,10 @@ def main():
     torch.save(model.state_dict(), 'model.pth')
     
     test_x = torch.randn(1, 28*28).to(device) * 0.2
-    plt.imshow(model(test_x).view(28, 28).cpu().detach().numpy())
+    generated_model = model(test_x).view(28, 28).cpu().detach().numpy()
+    plt.imshow(generated_model)
     plt.show()
+    plt.imsave('generated.png', generated_model)
 
 
 if __name__ == '__main__':
