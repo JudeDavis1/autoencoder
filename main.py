@@ -16,7 +16,7 @@ transform = transforms.Compose([
 
 def main():
     model = AutoEncoder(28*28).to(device)
-    model.load_state_dict(torch.load('model.pth'))
+    model.load_state_dict(torch.load('model.pth', map_location=device))
 
     trainset = datasets.MNIST('data', download=True, train=True, transform=transform)
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size, shuffle=True)
