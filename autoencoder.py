@@ -7,15 +7,19 @@ class AutoEncoder(nn.Module):
         self.encoder = nn.Sequential(
             nn.Linear(input_dim, n_featuremap),
             nn.ReLU(),
-            nn.Linear(n_featuremap, n_featuremap//2),
+            nn.Linear(n_featuremap, n_featuremap * 2),
             nn.ReLU(),
-            nn.Linear(n_featuremap//2, n_featuremap//4),
+            nn.Linear(n_featuremap * 2, n_featuremap * 4),
+            nn.ReLU(),
+            nn.Linear(n_featuremap * 4, n_featuremap * 8),
         )
 
         self.decoder = nn.Sequential(
-            nn.Linear(n_featuremap//4, n_featuremap//2),
+            nn.Linear(n_featuremap * 8, n_featuremap * 4),
             nn.ReLU(),
-            nn.Linear(n_featuremap//2, n_featuremap),
+            nn.Linear(n_featuremap * 4, n_featuremap * 2),
+            nn.ReLU(),
+            nn.Linear(n_featuremap * 2, n_featuremap),
             nn.ReLU(),
             nn.Linear(n_featuremap, input_dim),
         )
